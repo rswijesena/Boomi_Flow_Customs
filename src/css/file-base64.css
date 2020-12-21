@@ -1,0 +1,39 @@
+.mw-bs .dropzone {
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.mw-bs .dropzone>p:last-child {
+    margin-bottom: 0;
+}
+
+.thumbsContainer {
+    display: 'flex';
+  flex-direction: 'row';
+  flex-wrap: 'wrap';
+  margin-top: 16;
+}
+
+ .thumb {
+    display: 'inline-flex';
+    border-radius: 2;
+    border: '1px solid #eaeaea';
+    margin-bottom: 8;
+    margin-right: 8;
+    width: 100;
+    height: 100;
+    padding: 4;
+    box-sizing: 'border-box'
+}
+
+ .thumbInner {
+    display: 'flex';
+    min-width: 0;
+    overflow: 'hidden';
+}
+
+ .imgtest {
+    display: 'block';
+    width: '100px';
+    height: '100px'
+}

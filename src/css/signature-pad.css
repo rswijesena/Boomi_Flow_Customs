@@ -1,0 +1,18 @@
+.mw-bs .signature-box .signature-box-header
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 1.25em;
+}
+
+.mw-bs .signature-box .signature-box-header .glyphicon {
+    margin-right: 0.25rem;
+}
+
+.mw-bs .signature-box canvas
+{
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+}

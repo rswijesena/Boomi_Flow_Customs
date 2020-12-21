@@ -1,0 +1,5 @@
+.mw-bs .table-small-item {
+    float: unset;
+    max-width: unset;
+    margin-bottom: 0.5rem !important;
+}
