@@ -9,7 +9,6 @@ const onTimerDone = async (props: IComponentProps): Promise<boolean> => {
     const outcomeId = (props.getAttribute('outcome id') || props.getAttribute('refreshOutcomeId')) as string;
     let outcome = null;
     const contentValue = props.getContentValue();
-    
 
     if (!manywho.utils.isNullOrWhitespace(outcomeId) && (contentValue != null && contentValue != 'N/A')) {
         outcome = manywho.model.getOutcome(outcomeId, props.flowKey);

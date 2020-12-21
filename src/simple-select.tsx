@@ -76,7 +76,6 @@ class SimpleSelect extends React.Component<IComponentProps, any> {
                         : '';
 
                 const stringValue = isDisabledoptionText;
-                console.log('XXXXXXXXX' + stringValue);
 
                 const boolValue = (stringValue == 'true');
 
