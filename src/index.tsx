@@ -11,3 +11,4 @@ export * from './outcome-timer';
 export * from './timer';
 export * from './download';
 export * from './simple-select';
+export * from './charCounter';

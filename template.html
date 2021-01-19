@@ -4,23 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-	<!--ARA-->
-	<link rel="icon" type="image/vnd.microsoft.icon" href="nus.ico">
-
-    <!--link rel="shortcut icon" href="https://assets.manywho.com/img/favicon/favicon.ico" type="image/x-icon" /-->
-    <link rel="apple-touch-icon" href="https://assets.manywho.com/img/favicon/apple-touch-icon.png" />
-    <link rel="apple-touch-icon" sizes="57x57" href="https://assets.manywho.com/img/favicon/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="https://assets.manywho.com/img/favicon/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="https://assets.manywho.com/img/favicon/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="https://assets.manywho.com/img/favicon/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="https://assets.manywho.com/img/favicon/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="https://assets.manywho.com/img/favicon/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="https://assets.manywho.com/img/favicon/apple-touch-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://assets.manywho.com/img/favicon/apple-touch-icon-180x180.png" />
-    <link rel="icon" sizes="192x192" href="https://assets.manywho.com/img/favicon/android-icon.png">
-    <meta name="msapplication-square310x310logo" content="https://assets.manywho.com/img/favicon/microsoft-310x310.png">
-
-    <title>NUS Boomi Flow - Admission</title>
+    <link rel="icon" href="https://assets.manywho.com/img/favicon.ico">
+    <title>Boomi Flow</title>
     <style>
         .mw-bs .wait-container {
             position: absolute;
@@ -32,7 +17,6 @@
             z-index: 1100;
             background-color: rgba(255, 255, 255, 0.5);
         }
-
         .mw-bs .wait-message {
             position: relative;
             text-align: center;
@@ -42,7 +26,6 @@
             font-size: 2em;
             padding: 0 2em;
         }
-
         /* outer */
         .mw-bs .wait-spinner {
             display: block;
@@ -57,7 +40,6 @@
             -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
             animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
         }
-
         /* middle */
         .mw-bs .wait-spinner:before {
             content: "";
@@ -72,7 +54,6 @@
             -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
               animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
         }
-
         /* inner */
         .mw-bs .wait-spinner:after {
             content: "";
@@ -87,7 +68,6 @@
             -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
               animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
         }
-
         @-webkit-keyframes spin {
             0%   {
                 -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
@@ -128,20 +108,18 @@
     <script>
         var manywho = {
             cdnUrl: 'https://assets.manywho.com',
-            requires: ['core', 'bootstrap3'],
             customResources: ['http://localhost:8080/{{filename-js}}', 'http://localhost:8080/{{filename-css}}'],
-            //customResources: ['https://s3.amazonaws.com/flow-ui-components/outcome-timer.js'],
+            requires: ['core', 'bootstrap3'],
             initialize: function () {
-
                 var queryParameters = manywho.utils.parseQueryString(window.location.search.substring(1));
-                
+
                 manywho.settings.initialize({
-                    platform: {
-                        uri: 'https://flow.manywho.com',
-                    },
                     adminTenantId: 'da497693-4d02-45db-bc08-8ea16d2ccbdf',
                     playerUrl: [ location.protocol, '//', location.host, location.pathname ].join(''),
-                    joinUrl: [ location.protocol, '//', location.host, location.pathname ].join('')
+                    joinUrl: [ location.protocol, '//', location.host, location.pathname ].join(''),
+                    platform: {
+                        uri: 'https://flow.manywho.com'
+                    }
                 });
 
                 var options = {
@@ -166,133 +144,28 @@
                     theme: queryParameters['theme']
                 };
 
-				
- 				//ARA
-				var tenantId = "a1bb77ea-6c4f-45a8-9a66-7375b3b85ba7";//FIXME
-						/*var tenantId = queryParameters['tenant-id'];
-						if (!tenantId) {
-							tenantId =
-								window.location.pathname
-								.split('/')
-								.filter(function (path) {
-									return path && path.length > 0;
-								})[0];
-						}*/
-				var flowId = queryParameters['flow-id'];
-				if(!flowId) {
-					flowId = "4972e9ab-1c42-4208-a536-9967d4f5e746";//FIXME
-				} 
-				
-				var join = queryParameters['join'];
-				if(!join) {
-				  //No join
-				  var joinSession = localStorage.getItem("boomiflow_join");
-				  if(joinSession != null) {
-					join = joinSession;
-				  }
-				} else {
-					console.log("Join is provided");
-                    localStorage.setItem("boomiflow_join", join);
-				}
-				
-                
-                if ((typeof tenantId === 'undefined') || (tenantId == null) || (tenantId == "")) {
-                    console.log("TenantId not provided");
-                } else {
-                    console.log("TenantId is provided");
-                    sessionStorage.setItem("boomiflow_tenantId", tenantId);
+                var tenantId = '{{tenantId}}';
+                if (!tenantId) {
+                    tenantId = window.location.pathname
+                                .split('/')
+                                .filter(function (path) {
+                                    return path && path.length > 0;
+                                })[0];
                 }
-                
-                var authorization = queryParameters['authorization'];
-                if ((typeof authorization === 'undefined') || (authorization == null) || (authorization == "")) {
-                    console.log("Authorization not provided");
-                } else {
-                    console.log("Authorization is provided");
-                    sessionStorage.setItem("boomiflow_authorization", authorization);
-                }
-                
-                var authcode = queryParameters['code']; 
-                console.log("Authorization Code value: " + authcode);
-                
-                if ((typeof authcode === 'undefined') || (authcode == null) || (authcode == "")) {
-                    //Do nothing
-                } 
-				if (authcode) {
-                    $.ajax(
-                    	{
-                    		type: "POST",
-                    		url: "https://flow.manywho.com/api/run/1/state/" + join + "/values",
-                    		data: JSON.stringify([
-                    			{
-                    				"contentType": "ContentString",
-                    				"contentValue": authcode,
-                    				"developerName": "authcode",
-                    				"objectData": null,
-                    				"typeElementDeveloperName": null,
-                    				"typeElementId": null,
-                    				"typeElementPropertyDeveloperName": null,
-                    				"typeElementPropertyId": null,
-                    				"valueElementId": "bbd64080-bb52-4dc1-b8a2-dea71da49aa5"
-                    			}
-                    		]),
-                    		headers: {
-                    			"ManyWhoTenant" : sessionStorage.getItem("boomiflow_tenantId"),
-                    			"Authorization" : sessionStorage.getItem("boomiflow_authorization")
-                    		},
-                    		contentType: "application/json; charset=utf-8",
-                    		dataType: "json",
-                    		success: function (){
-                    			console.log("Authorization code was captured"); 
-                    			//We might need to refresh the screen
-                    		},
-                    		error: function(errMsg) {
-                    			console.log("Error when pushing Authorization code:" + JSON.stringify(errMsg));
-								sessionStorage.setItem("boomiflow_authcode", authcode);
-                    		}
-                    	}
-                    );
-                }
-                //End ARA
 
-				//ARA Third line was change to take the var instead of the query parameter														
                 manywho.engine.initialize(
                     tenantId,
-                    flowId,
-                    queryParameters['flow-version-id'],
+                    '{{flowId}}',
+                    '{{flowVersionId}}',
                     'main',
-                    join,
+                    queryParameters['join'],
                     queryParameters['authorization'],
                     options,
                     queryParameters['initialization']
                 );
-				
             }
         };
     </script>
-	<script>
-		//ARA
-		var retries		= 0;
-		var maxRetries	= 10;
-		
-		function addReboot() {
-			var navBar=$(".navbar-nav");
-			if(navBar) {
-				console.log("Adding reboot");
-				var jscommand = "javascript:localStorage.removeItem('boomiflow_join'); window.location.href='http://localhost:8080/index.html'";//FIXME
-				$(".navbar-nav").append('<li><a href="'+jscommand+'">Reboot</a></li>');
-			} else {
-				retries++;
-				if(retries < maxRetries) {
-					console.log("Navigation bar not found, retrying...");
-					setTimeout(addReboot, 2000);
-				} else {
-					console.log("Maximum retries reached.");
-				}
-			}	
-		}
-		setTimeout(addReboot, 2000);
-		//END ARA
-	</script>
 
     <script src="https://assets.manywho.com/js/loader.min.js"></script>
 </body>
